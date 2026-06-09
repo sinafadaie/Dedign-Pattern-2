@@ -1,0 +1,84 @@
+we use adaptor pattern when we have an existing class
+we want to use it somewhere,
+but the interface of this class does not match the form that we expect.
+(and we can't change the type!)
+
+in this situation we can use adaptor pattern to convert the interface
+to different form!
+we can create a middle class that work as adaptor,
+has the type that we want,
+and using the code that library has!
+we create this class as "CaramelAdapter"
+
+Note: we can use inheritance to use adapter pattern (Mosh2)
+      extend to Caramel to access his code
+      and implement the Filter interface to has the type,
+      but due to java limit classes to extend just one class we have some limitation here!
+      (every class just has one parent)
+      so using composition is more flexible than inheritance.
+      The old saying "favor composition over inheritance!"
+      inheritance is not bad, but sometime composition is better solution.
+
+Note: if Filter was abstract class instead interface
+      we can't use inheritance
+      (we need to extend it to both Filter & Caramel)
+
+Note: because of this limitation "Composition" is better approach than "Inheritance"
+      and GOF using composition!
+
+Note:  Proxy says:
+       “I’m exactly like the real object, but before reaching the real object, go through me.”
+       (THEY USE SAME INTERFACE)
+       it's like proxy on servers, they want to hide main server!
+       Adapter says:
+       “This class doesn’t have the interface you want; I translate it so it becomes usable.”
+
++---------------------+              +----------------------+
+|      ImageView      |              |      <<interface>>   |
+|---------------------|              |        Filter        |
+| + apply(filter)     | ...........> |----------------------|
++---------------------+              | + apply(photo)       |
+                                     +----------------------+
+                                                ^
+                                                |
+                                                |
+                                     +----------------------+
+                                     |    CaramelAdapter    |
+                                     |----------------------|
+                                     |                      |
+                                     +----------------------+
+                                                ◆
+                                                |
+                                                |
+                                                v
+                                     +----------------------+
+                                     |       Caramel        |
+                                     |----------------------|
+                                     |                      |
+                                     +----------------------+
+
+
+GOF:
++-------------------+          +-------------------+
+|      Client       | -------> |      Target       |
++-------------------+          |-------------------|
+                               | + request()       |
+                               +-------------------+
+                                         ^
+                                         |
+                                         |
+                               +-------------------+
+                               |      Adapter      |        Note: it's act like adaptor that
+                               |-------------------|              that convert the voltage!
+                               | - adaptee         |
+                               | + request()       |
+                               +-------------------+
+                                         ◆
+                                         |
+                                         |
+                                         v
+                               +-------------------+
+                               |      Adaptee      |
+                               |-------------------|
+                               | +specificRequest()|
+                               +-------------------+

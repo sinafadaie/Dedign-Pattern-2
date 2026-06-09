@@ -1,0 +1,17 @@
+we want to develop some filter app on images (like what we have on instagram)
+we have Filter interface that represent our filters
+we have ImageView that just show our filter on images
+we have a custom filter like VividFilter
+we use some third Party library like avaFilter
+that contain so many filter that we can use on our App!
+
+Note: java has some standard class for Images
+      but we don't use them due to simplicity!
+
+
+problem: avaFilter like Caramel didn't implement our Filter interface
+         (because it's a third party, we can't modify it!)
+         so when we use:
+         imageView.applyFilter(new Caramel());
+         we will get error
+         (it's not Filter type!)

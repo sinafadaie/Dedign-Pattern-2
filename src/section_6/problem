@@ -1,0 +1,25 @@
+sometimes we have a concept (like sendMessage)
+that have different forms (like normal, urgent, secret,..)
+that probably we have some abstract class or interface for them.
+
+each form have some different implementations!
+like we can use telegram, email, whatsApp, sms,...
+to send each form of message,
+it's create a complex hierarchy!
+
+if we want to implement this by "INHERITANCE"
+we have n*n situations
+(we should implement all abstract classes for telegram, sms, ...)
+
+
+
+imagine we have designing a universal remote control app fo TVs,
+we have some forms like remote just have base functions (turn on/ turn off)
+                   like remote have some advance functions too (select chanel)
+simultaneously we need implement these logics separately for each brands (like sony)
+now we implement it by "INHERITANCE"
+
+
+problem: if we want to support another brand like samsung
+         we should implement all the hierarchy for samsung!
+         we can use bridge pattern to simplify this!

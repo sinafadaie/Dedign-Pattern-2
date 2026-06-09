@@ -1,0 +1,52 @@
+with Bridge we can build simple but yet flexible hierarchy!
+we use "POLYMORPHISM" to divide our multi dimensional hierarchy to one dimension.
+we use bridge pattern when we have a hierarchy that can grow in two different dimensions.
+we can split the complex hierarchy to some simple separated ones!
+
+indeed we convert one inheritance to "COMPOSITION",
+this composition (like device field) is our bridge,
+we create two separate hierarchy that connect to each other by this bridge
+(each new hierarchy is one dimensional)
+
+Note: we have feature hierarchy &
+      Implementation (device) hierarchy in our example.
+
+Note: we can now add new brand like LG, just by one new class
+      we can now add new feature like nextChannel(), just by add new method on AdvancedRemoteControl:             public void nextChannel() {
+                                                                                                                        device.setChannel(device.getChannel() + 1);
+                                                                                                                       }
+
+
++----------------------+          +----------------------+
+|     RemoteControl    |<>------->|        Device        |
+|----------------------|          |----------------------|
+| - imp                |          | + OperationImpl()    |
+| + Operation()        |          +----------------------+
++----------------------+                     ^
+           ^                                 |
+           |                    -----------------------------
+           |                    |                           |
++----------------------+  +----------------------+  +----------------------+
+|AdvancedRemoteControl |  |         Sony         |  |       Samsung        |
+|----------------------|  |----------------------|  |----------------------|
+| + Operation()        |  | + OperationImpl()    |  | + OperationImpl()    |
++----------------------+  +----------------------+  +----------------------+
+
+
+
+GOF:
++----------------------+          +----------------------+
+|     Abstraction      |<>------->|     Implementor      |
+|----------------------|          |----------------------|
+| - imp                |          | + OperationImpl()    |
+| + Operation()        |          +----------------------+
++----------------------+                     ^
+           ^                                 |
+           |                    -----------------------------
+           |                    |                           |
++----------------------+  +----------------------+  +----------------------+
+| RefinedAbstraction   |  | ConcreteImplementorA |  | ConcreteImplementorB |
+|----------------------|  |----------------------|  |----------------------|
+| + Operation()        |  | + OperationImpl()    |  | + OperationImpl()    |
++----------------------+  +----------------------+  +----------------------+
+

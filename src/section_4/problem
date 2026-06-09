@@ -1,0 +1,17 @@
+imagine we have notification service,
+when we want to send a notification we should pass some steps each time
+on Main class
+(Main class depend on 4 classes just to send notification!)
+
+1.create connection to server
+2.make authentication
+3.set the message
+4.send the notification
+5.disconnect from server
+
+facade pattern solve this!
+
+problem: imagine we have 1o classes that they want to send notification
+         each one of them, need to couple these 4 classes!
+         it's a lot of coupling!
+         it's make modification so costly!

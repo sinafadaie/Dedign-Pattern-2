@@ -1,0 +1,19 @@
+sometimes we have an app that need a large number of objects,
+these objects take a significant amount of memory.
+imagine we have google map on mobile!
+
+the App need to load so many points to rendering map!
+thousands cafes, restaurant, hospital,...
+
+in this App we have:
+Point class (have x,y of place,
+             name of the place,
+             icon of the place)
+
+PointService class that call backend to get points from server
+it's like when we open the app, he will load all points!
+
+
+Problem: we are loading thousands points from server on small mobile
+         so many mobile crashed because they had not enough memory!
+         we can use flyweight pattern to solve this problem!

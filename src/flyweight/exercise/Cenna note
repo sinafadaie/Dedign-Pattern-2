@@ -1,0 +1,13 @@
+FontFamily class is our flyweight.
+FontFactory is factory.
+
+Mosh make FontSize & isBold as flyweight too,
+he make hash (name,size,bold) and use this hash as key!
+it was interesting
+so his FontFamily has three fields:
+
+  private final String fontFamily;
+  private final int fontSize;
+  private final boolean isBold;
+
+Hash: Objects.hash(fontFamily, fontSize, isBold);

@@ -1,0 +1,34 @@
+imagine we are in a company that sell cloud hosting services.
+we want to implement a class for storing data in cloud.
+we have CloudStream that read or write data to the cloud.
+
+manager said: hey "sometimes" we need encrypt data before storing on cloud!
+              like when we store information about customer credit card.
+              so we create EncryptCloudStream class for this
+
+Note: we can't change write() method on CloudStream
+      because we need storing plain data too!
+
+manager said: hey "sometimes" we need compress data storing on cloud!
+              like when data is huge and has low priority
+              so we create "CompressedCloudStream" class for this
+
+Note: we can't change write() method on CloudStream
+      because we need storing plain data too!
+      also we can't change write() method on EncryptCloudStream
+      because we need store some encrypt data without compressing!
+
+
+Problem: tomorrow manager said, hey "sometime" we need compress and encrypt data!
+         we should implement it on another class like "EncryptCompressedCloudStream"
+         but it's just duplicate code!
+         if we have multiple functionalities the "Combination" of these functionalities
+         (in combination the order is not the matter!
+          in Permutation the order is matter!)
+         is so countless, and we need separate class foe each one!
+         it's not maintainable!
+         we use Decorator Pattern to add additional behavior to an obj.
+         so we can create just create base obj (like CloudStream obj)
+         and add some functionalities that we want,
+         "WE DECORATE BASE OBJECT WITH ADDITIONAL BEHAVIOR"
+         like what we use to create some customise obj!

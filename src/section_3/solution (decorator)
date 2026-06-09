@@ -1,0 +1,93 @@
+The old saying : "favor composition over inheritance!"
+                  inheritance is not bad, but sometime composition is better solution.
+
+
+now we have CloudStream as parent and
+Encrypt & Compress class as children,
+but we can convert this "vertical" relationship (hierarchy by inheritance)
+to some "horizontal" relationship (like Chain of Responsibility pattern)
+we can introduce an Interface like "Stream"              (it's like handler class in Chain of Responsibility)
+and use a field based on "Stream" type to link classes   (it's like next filed in Chain of Responsibility)
+
+Note: base class (CloudStream) has not the "Stream" field
+      it's the core of chain!
+      it's like we start from end of chain in Chain of Responsibility
+
+Note: the core idea is almost same,
+      but the purpose is different
+      Decorator wraps a single "object"
+      Chain of Responsibility operates on a "request"
+      In Decorator, the final output is the composition of all layers.
+      In Chain of Responsibility, only one handler may respond.
+      In Decorator, the focus is on composing behaviors.
+      In Chain of Responsibility, the focus is on passing responsibility.
+      In Decorator order is not the matter
+      In Chain of Responsibility order is matter!
+
+Note: we use composition (inject Stream type)
+      to create chain.
+      we create a chain to customize it in each step
+      and at last in base class we call the actual code (like write() on
+                                                         CloudStream class)
+
+
+                 +----------------------+
+                 |      Stream          |
+                 |----------------------|
+                 | + write()            |
+                 +----------------------+
+                           ^
+                           |
+             ------------------------------
+             |                            |           Note: mosh remove Decorator Interface for simplicity!
++--------------------------+              |
+|    CloudStream           |              |           Note: ConcreteComponent (CloudStream) is our main class
+|--------------------------|              |                 the class in the core of chain
+| + write()                |              |                 he do the actual code!
++--------------------------+              |
+                                          |           Note: ConcreteDecorator classes just add some modifications              before();
+                                          |                 and delegate the real action to next step                          inner.operation();
+                                          |                 the real action will done on  ConcreteComponent                    after();
+                        -----------------------------------------
+                        |                                       |
+          +-----------------------------+      +-----------------------------+
+          |    EncryptedCloudStream     |      |    CompressedCloudStream    |
+          |-----------------------------|      |-----------------------------|
+          | - component: Component      |      | - component: Component      |
+          | + write()                   |      | + write()                   |
+          +-----------------------------+      +-----------------------------+
+
+
+
+GOF:
+                 +----------------------+
+                 |      Component       |
+                 |----------------------|
+                 | + Operation()        |
+                 +----------------------+
+                           ^
+                           |
+             ------------------------------
+             |                            |
++--------------------------+   +--------------------------+
+|    ConcreteComponent     |   |        Decorator         |
+|--------------------------|   |--------------------------|
+| + Operation()            |   | - component: Component   |
++--------------------------+   | + Operation()            |
+                               +--------------------------+
+                                           ^
+                                           |
+                        -----------------------------------------
+                        |                                       |
+          +-----------------------------+      +-----------------------------+
+          |    ConcreteDecoratorA       |      |    ConcreteDecoratorB       |
+          |-----------------------------|      |-----------------------------|
+          | - addedState                |      | + AddedBehavior()           |
+          | + Operation()               |      | + Operation()               |
+          +-----------------------------+      +-----------------------------+
+
+
+Summary: we use Decorator pattern when we want to create "an customized obj"
+         like Stream obj that can store data with encryption and compaction
+         we do this by horizontal chain!
+         (it's like Sort obj on Spring)

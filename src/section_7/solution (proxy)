@@ -1,0 +1,83 @@
+we want to load library class,
+but not all his field, it's the pattern behind LAZY loading.
+(we have library class that has composite relationship to Ebook
+ but we want load library class without loading ebook class)
+
+to implement it, we need a middle class as "proxy" class (EbookProxy)
+between Library and Ebook. (it's act like agent
+                            library just talk to proxy
+                            ebook just talk to proxy)
+we can put some logic on EbookProxy, that on just demand load Ebook!
+this pattern used in many frameworks. (lazy loading)
+
+1.create Ebooks interface that contain our
+  main responsibility of books
+  (we want all real and proxy have these functionalities)
+
+2.the library just talk to proxy
+  but due to flexibility, we use interface type in Library
+
+3.just proxy can talk to real Ebook,
+  (we create proxy to hide the real obj!)
+  so we have real Ebook type in proxy.
+  so we can pu some logic here, when a client want ebook
+  proxy can do some process at this level (like make it lazy or logging)
+
+Note: our implementation is following the open close principle,
+      because tomorrow we can supply a different proxy implementation,
+      like performs authorization or logging.
+      we create new separate proxy (EbookLoggingProxy)
+      we can just simply replace this new proxy that contain logging logic
+      with old one, this is open close principle!
+
+Note: in our example we had some code before calling the ebook (show() method)
+      because we wanted to have lazy initialization,
+      but that is not necessary as part of this pattern
+      the whole point of this pattern is that this proxy is an object that
+      look like a real subject, because both these classes implement the same interface
+      (we we can implement another logic like logging,...)
+
+
+
+        +---------+
+        | Library |
+        +---------+
+             |
+             v
+   +-------------------+
+   | Ebooks            |<<interface>>
+   |-------------------|
+   | +request()        |-----------------+
+   +-------------------+                 |
+        ^                                |
+        |                                |
+        |                                |
++-------------------+           +-------------------+
+| Proxy             |           | RealEbook         |
+|-------------------|◆--------> |-------------------|
+| -realSubject      |           | +request()        |
+| +request()        |           +-------------------+
++-------------------+
+
+
+
+GOF:
+        +---------+
+        | Client  |
+        +---------+
+             |
+             v
+   +-------------------+
+   | Subject           |<<interface>>
+   |-------------------|
+   | +request()        |-----------------+
+   +-------------------+                 |
+        ^                                |
+        |                                |
+        |                                |
++-------------------+           +-------------------+
+| Proxy             |           | RealSubject       |
+|-------------------|◆--------> |-------------------|
+| -realSubject      |           | +request()        |
+| +request()        |           +-------------------+
++-------------------+

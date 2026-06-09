@@ -1,0 +1,51 @@
+we can remove direct relationship from Main class to these 4 classes
+by creating a middle classes like "NotificationService"
+
+this middle class act like an Interface,
+he know how to send notifications
+but just him has relationship to these 4 classes
+so when we want to modify something,
+we just need to modify this class and those 4 classes
+the other classes don't need modification
+
+summary: FACADE class is a class that ENCAPSULATE
+         some other classes based on specific
+         purpose or functionality.
+
+
+            +------------------+
+            |  Other Classes   |
+            |  like Main class |
+            |                  |
+            +------------------+
+                     |
+                     |
+            +------------------+
+            |NotificationService|
+            |------------------|
+            | + operation()    |
+            +------------------+
+                     |
+       |-------------|----------------|----------------|
+       v             v                v                v
++-------------+ +-------------+ +-------------+  +-------------+
+| Message     | | AuthToken   | | Connection  |  |NotificationServer|
+|-------------| |-------------| |-------------|  |-------------|
+|+operationA()| |+operationB()| |+operationC()|  |+operationC()|
++-------------+ +-------------+ +-------------+  +-------------+
+
+
+GOF:
+            +------------------+
+            |      Facade      |
+            |------------------|
+            | + operation()    |
+            +------------------+
+                        |
+       |----------------|-------------|
+       v                v             v
++-------------+ +-------------+ +-------------+
+| SubsystemA  | | SubsystemB  | | SubsystemC  |
+|-------------| |-------------| |-------------|
+|+operationA()| |+operationB()| |+operationC()|
++-------------+ +-------------+ +-------------+

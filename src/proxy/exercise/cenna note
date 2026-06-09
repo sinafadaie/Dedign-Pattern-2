@@ -1,0 +1,6 @@
+this exercise is like designing Hibernate,
+we put some "tracker logic" by proxy pattern
+
+proxy want to hide real obj,
+and guarantee when you want to get access
+pass through proxy!

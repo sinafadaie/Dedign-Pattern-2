@@ -1,0 +1,15 @@
+we set Artefact as core (we create Artifact obj just by name
+                         and render it)
+
+we develop some classes that can store the Artefact obj (for this we create
+                                                         Component interface)
+
+each step can add some render on our Artefact obj
+like ErrorArtifact, add error sign
+
+Note: ErrorArtefact & MainArtefact are our decorator
+      Artefact is our Component.
+
+Note: when we want to combine,
+      we create a MainArtefact obj on surface (at last we have MainArtefact obj)
+      that inside him, we use an artefact obj

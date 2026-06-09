@@ -1,0 +1,57 @@
+Composite Pattern means modeling simple objects and composite objects (like group obj)
+with a common interface so that both can be treated uniformly.
+
+it means we have same functionalities on these obj (render() on shape & group)
+we create an interface above them,
+and instead some condition to find witch type
+use polymorphism on Group!
+
+Note:  composite object is an object that can contain itself and other objects
+       like folder, like group obj on PowerPoint
+       so it can be have limitless nested relationships
+       it's the reason, we need recursive logic
+
+Note: if we want to add new functionalities (like move, delete)
+      we should add them on Component Interface
+      because they should use on every obj on the hierarchy!
+
+            +------------------+
+            |    Component     |
+            |------------------|
+            | + render()       |
+            +------------------+
+                  /_\
+                   |
+         -----------------------
+         |                     |
+ +------------------+   +----------------------+
+ |       Shape      |   |         Group        |
+ |------------------|   |----------------------|
+ | + render()       |   | - List<Component>    |
+ +------------------+   | + render()           |
+                        | + add()              |
+                        +----------------------+
+
+
+ GOF UML:
+           +------------------+
+           |    Component     |
+           |------------------|
+           | + operation()    |
+           +------------------+
+                 /_\
+                  |
+        -----------------------
+        |                     |
++------------------+   +----------------------+
+|       Leaf       |   |       Composite      |
+|------------------|   |----------------------|
+| + operation()    |   | - children (based on component)|
++------------------+   | + operation()        |
+                       | + add()              |
+                       | + remove()           |
+                       | + getChild()         |
+                       +----------------------+
+
+summary: with composite pattern we can represent a hierarchy of objects
+         and treat objects on this hierarchy same way!

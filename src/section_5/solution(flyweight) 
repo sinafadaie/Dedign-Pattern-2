@@ -1,0 +1,54 @@
+each point has some fields
+(x,y,enum are int and enum, they just need 4 bytes)
+load icon has large size!
+
+the idea is simple!
+we just have some limited icon (cafe, hospital,...)
+we can store them once, and reuse them!
+instead repeat them on every point object!
+
+1. so we move the cross field (icon field)
+   to new class as "PointIcon" class
+   (this is the object we want to share)
+   we always need to separate it.
+
+2. How we can sure, we are store each icon in a single place on memory?
+   for this purpose, we create a factory class as "PointIconFactory "
+   that guarantee this
+   (if we have an icon of specific type, he return that icon
+    if we hav not yet, he create it, store it, return it)
+
+Note: factory class in this pattern always need
+      "HASHMAP" data structure, because we tell him what icon we want
+      he should check if there is?
+      he want to find icon -----> value is icon
+      based on icon type   -----> key is type
+
+
+Note: flyweight object is an object that we can share
+      like our PointIcon obj
+                                                            flyweight class
+      +------------------------+                    +------------------------------+
+      |         Point          |------------------->|          PointIcon           |
+      |------------------------|                    |------------------------------|
+      | x : int                |                    | type : PointType             |
+      | y : int                |                    | icon : byte[]                |
+      +------------------------+                    +------------------------------+
+                                                                    ^
+                                                                    |
+                                                                    |
+      +------------------------+                    +------------------------------+
+      |      PointService      |                    |       PointIconFactory       |
+      |------------------------|. . . . . . .  . .> |------------------------------|
+      | + getPoints()          |                    | + getPointIcon(type)         |
+      +------------------------+                    |   : PointIcon                |
+                                                    +------------------------------+
+
+
+
+Summary:
+         when we have repetitive objects
+         we can use the flyweight pattern
+         we need separate the data we want to share
+         store it somewhere else (like factory class)
+

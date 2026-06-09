@@ -1,0 +1,21 @@
+the proxy pattern, as the name implies,
+allow us to create a proxy or an agent for a real object.
+
+sometimes we need just a partial of an objects.
+so instead load whole obj, we create an proxy at the middle
+to just load what we need!
+and we can do something at this middle layer
+like logging, access control, caching,...
+
+Imagine we are going to build an application for reading ebooks,
+we have "Library" class that contain all user's book,
+
+problem: when application load,
+         all user's book get loaded (because we need to load library obj)
+         but he just need one of them, so we bring some data to RAM, that
+         we don't want it!
+
+Note: we need library obj
+      it's our domain
+      but we should desig n it somehow, that show all the books
+      but load base on demanded!

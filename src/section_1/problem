@@ -1,0 +1,20 @@
+when we have "hierarchy" relationships we can use composite pattern!
+like folder & file on windows.
+each folder have some file and other folder.
+when we move a folder, all sub file and folder moves!
+
+our example code is like PowerPoint
+we have shapes (like square, circle,...)
+we can make some shapes as one group (to move or resize to gather)
+we can make some groups as one another group!
+
+Note: at first we create List of shape on Group class
+      but we we want to store another group to
+      so we use "Object" class to cover all of them
+
+Note: we use some recursive logic on Group methods!
+
+problem: if we use this solution
+         we need these casting
+         and we have more type the code going to be so ugly!
+

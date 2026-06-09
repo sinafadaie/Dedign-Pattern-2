@@ -1,0 +1,175 @@
+COMPOSITE
+
+Problem:
+Need to treat individual objects and groups of objects in the same way.
+it's happened when we have composite objects (an object can contain type of itself like folder)
+
+Core idea:
+Organize objects into a tree structure where both single objects and collections share a common interface.
+as "Component" interface
+we use polymorphism and recursive logic
+
+Roles:
+Component: common interface for all objects
+Leaf: individual object with no children
+Composite: object that contains children
+Client: works with Component without caring whether it is a Leaf or Composite
+
+When to use:
+when our domain need composite objects
+
+-------------------------------------------------
+ADAPTER
+
+Problem:
+Need to use an existing class, but its interface is incompatible with what the client expects.
+like we develop some image filter (and has related interface)
+and simultaneously we want to use an external library (that has different interface)
+
+Core idea:
+Wrap the existing class and translate its interface into one the client can use.
+like CaramelAdapter that accept external type, and map it to our internal type
+
+Roles:
+Target: the interface the client expects                        (internal interface)
+Adaptee: the existing class with the incompatible interface     (external interface)
+Adapter: converts Target calls into Adaptee calls               (middle class)
+Client: uses the Target interface
+
+When to use:
+When you want to reuse an existing class without changing its code.
+
+When not to use:
+When you can directly modify the original class, or when too many layers of adaptation make the design unnecessarily complex.
+
+-------------------------------------------------
+DECORATOR
+
+Problem:
+Need to add behavior or responsibilities to an object dynamically, without changing its class.
+to prevent separate class for combination
+like combination of (compressing,encrypting,... om Image)
+
+Core idea:
+Wrap the original object inside another object that has the same interface and adds extra behavior before or after delegating to the original object.
+it's like create horizontal chain,
+each step add something and pass to the next step
+
+Roles:
+Component: common interface                                      (to use polymorphism)
+ConcreteComponent: the original object                           (the main logic)
+Decorator: base wrapper class implementing the same interface
+ConcreteDecorator: adds specific behavior
+
+When to use:
+When you want flexible, runtime extension of behavior instead of creating many subclasses.
+
+When not to use:
+When the design becomes too layered and hard to understand, or when simple inheritance is enough.
+
+----------------------------------------------------
+FACADE
+
+Problem:
+A subsystem is complex and hard to use directly.
+when we want to encapsulate some separate classes as one functionalities.
+like SendNotification class
+
+Core idea:
+Provide a simple, unified interface to a set of interfaces in the subsystem.
+
+Roles:
+Facade: simplified entry point
+Subsystem classes: the underlying complex classes
+Client: uses the facade instead of dealing with subsystem details
+
+When to use:
+When you want to simplify usage of a complex system or reduce coupling between client and subsystem.
+
+When not to use:
+When clients need full control over subsystem details, or when the facade becomes a god object that does too much.
+
+-------------------------------------------------------
+FLYWEIGHT
+
+Problem:
+Need to create a very large number of similar objects, but storing them separately uses too much memory.
+like points on Maps
+
+Core idea:
+Share the common, immutable part of state between many objects, and keep only the unique part outside.
+like icons
+
+Note: we always need some factory class to ensure shared common is unique
+      we use hashMap to guarantee
+
+Roles:
+Flyweight: shared object containing intrinsic state
+ConcreteFlyweight: actual shared implementation
+FlyweightFactory: creates and reuses flyweights
+Client: supplies extrinsic state when using the flyweight
+Types of state:
+
+Intrinsic state: shared, common, immutable
+Extrinsic state: unique, supplied from outside
+
+When to use:
+When you have huge numbers of fine-grained objects and memory usage is a problem.
+
+----------------------------------------------------------
+BRIDGE
+
+Problem:
+when we have a multi dimensional hierarchy
+like a Messenger class that have some sub classes based on type (normal,secret,urgent,...)
+and each type have some separate implementations (like telegram,whatsapp,...)
+
+
+Core idea:
+Split a class into two separate hierarchies:
+
+Abstraction
+Implementation and connect them with "composition" instead of inheritance.
+connect to hierarchy by bridge (composition)
+
+Roles:
+Abstraction: high-level control interface                     (like secret,normal,)
+RefinedAbstraction: extended versions of the abstraction
+Implementor: interface for implementations                    (like telegram,..)
+ConcreteImplementor: actual implementations
+
+When to use:
+When a class has multiple dimensions of change and inheritance would lead to too many subclasses.
+
+When not to use:
+When there is only one implementation, or when the added abstraction makes the design unnecessarily complicated.
+
+-----------------------------------------------------------
+Problem:
+Need to control access to an object without changing the object itself.
+when we want hide the real obj, and guarantee to execute some logic
+like logging, or lazy loading we put the main obj behind "proxy obj"
+
+Core idea:
+Create a placeholder or wrapper object that has the same interface as the real object and forwards requests to it, possibly adding control logic.
+
+
+Roles:
+Subject: common interface                 (for both real and proxy)
+RealSubject: the actual object
+Proxy: controls access to the real object
+Client: uses Subject and may not know whether it talks to Proxy or RealSubject
+Common uses:
+
+Lazy loading
+Access control
+Logging
+Caching
+Remote access
+
+When to use:
+When you need an extra layer of control before reaching the real object.
+
+When not to use:
+When direct access is fine and the proxy only adds unnecessary complexity.
+
