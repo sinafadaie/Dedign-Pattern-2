@@ -3,3 +3,13 @@ in the first part we study BEHAVIORAL design patterns
 
 in this part we will study STRUCTURAL design pattern
 (relationships between objects)
+
+Imagine a company:
+Structural = organization chart
+who is under whom, which teams exist, how departments are arranged
+
+Behavioral = how people work together
+who reports to whom, who sends messages, who makes decisions
+
+Structural patterns shape the system.
+Behavioral patterns run the system.
